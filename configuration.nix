@@ -72,7 +72,7 @@
     hyprland
     kitty
     waybar
-    hyprpaper
+    #hyprpaper
     wofi
     mako
     libnotify
@@ -92,7 +92,7 @@
 
     vscode
     python3
-    librewolf
+    #librewolf
     ungoogled-chromium
     google-chrome
     neofetch
@@ -106,13 +106,21 @@
 	zathura
 	fzf
 	udiskie
+	dbus
+# for libreoffice
+	libreoffice-qt
+	hunspell
+	hunspellDicts.en_US
+	hunspellDicts.ru_RU
+    
+    virtualbox
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
-#  nix.settings = {
-#    substituters = ["https://hyprland.cachix.org"];
-#    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
-#  };
+  nix.settings = {
+    substituters = ["https://hyprland.cachix.org"];
+    trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
   
   # Hyprland nixpkg
   programs.hyprland = {
@@ -120,6 +128,10 @@
     xwayland.enable = true;
 # this line bugs
 #    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+# sets hyprland to the stable package
+	#package = inputs.hyprland.${pkgs.system}.packages.hyprland;
+	package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+	portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   
   # Hyprland flake
@@ -155,6 +167,9 @@
     enable = true;
 	criticalPowerAction = "Hibernate";
   };
+
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

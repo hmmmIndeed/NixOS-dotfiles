@@ -12,7 +12,8 @@
 	};
 
     # for Hyprland
-    hyprland.url = "github:hyprwm/Hyprland";
+    #hyprland.url = "github:hyprwm/Hyprland";
+	hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # for Hyprland plugins
     hyprland-plugins = {
       url = "github:hyprwm/hyprland-plugins";
@@ -34,7 +35,23 @@
           inherit system;
           # for Hyprland plugins
           specialArgs = { inherit inputs; };
-          modules = [ ./configuration.nix ./suspend-and-hibernate.nix ];
+          modules = [ 
+		    ./configuration.nix
+			./suspend-and-hibernate.nix
+
+#    		home-manager.nixosModules.home-manager
+#			{
+#			  home-manager = {
+#			    extraSpecialArgs = {
+#				  inherit inputs;
+#				};
+#                useGlobalPkgs = true;
+#                useUserPackages = true;
+#                backupFileExtension = "backup";
+#                users.asulk = [ ./home.nix ./text.nix ];
+#             };
+#           }
+		  ];
         };
       };
       homeConfigurations = {
@@ -42,29 +59,8 @@
           inherit pkgs;
           # for ags
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home.nix ./text.nix];
+          modules = [ ./home.nix ./text.nix ];
         };
       };
     };
 }
-
-#{
-#  description = "A very basic flake";
-#
-#  inputs = {
-##    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
-#    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-#  };
-#
-#  outputs = { self, nixpkgs, ... }:
-#    let
-#      lib = nixpkgs.lib;
-#    in {
-#    nixosConfigurations = {
-#      eva = lib.nixosSystem {
-#        system = "x86_64-linux";
-#        modules = [./configuration.nix];
-#      };
-#    };
-#  };
-#}
