@@ -13,6 +13,12 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # OS-Prober
+#  boot.loader.grub = {
+#    enable = true;
+#	device = "/dev/nvme0n1";
+#	useOSProber = true;
+#  };
 
   networking.hostName = "eva"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -54,7 +60,17 @@
   users.users.asulk = {
     isNormalUser = true;
     description = "asulk";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+	  "networkmanager"
+	  "wheel"
+	  "libvirtd"
+	  "video"
+	  "audio"
+	  "disk"
+	];
+	group = "users";
+	home = "/home/asulk";
+	uid = 1000;
     packages = with pkgs; [];
   };
 
@@ -113,7 +129,13 @@
 	hunspellDicts.en_US
 	hunspellDicts.ru_RU
     
-    virtualbox
+	os-prober
+	file
+	sioyek
+	zip
+	unzip
+	ghidra
+	spotify
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -168,8 +190,11 @@
 	criticalPowerAction = "Hibernate";
   };
 
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+  virtualisation.libvirtd.enable = true;
+  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

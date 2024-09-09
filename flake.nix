@@ -36,8 +36,8 @@
           # for Hyprland plugins
           specialArgs = { inherit inputs; };
           modules = [ 
-		    ./configuration.nix
-			./suspend-and-hibernate.nix
+		    		./configuration.nix
+        		./suspend-and-hibernate.nix
 
 #    		home-manager.nixosModules.home-manager
 #			{
@@ -51,7 +51,7 @@
 #                users.asulk = [ ./home.nix ./text.nix ];
 #             };
 #           }
-		  ];
+		  		];
         };
       };
       homeConfigurations = {
@@ -59,7 +59,10 @@
           inherit pkgs;
           # for ags
           extraSpecialArgs = { inherit inputs; };
-          modules = [ ./home.nix ./text.nix ];
+          modules = [
+						./home.nix
+						./text.nix
+					];
         };
       };
     };
