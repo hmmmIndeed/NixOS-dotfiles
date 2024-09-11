@@ -61,16 +61,17 @@
     isNormalUser = true;
     description = "asulk";
     extraGroups = [
-	  "networkmanager"
-	  "wheel"
-	  "libvirtd"
-	  "video"
-	  "audio"
-	  "disk"
-	];
-	group = "users";
-	home = "/home/asulk";
-	uid = 1000;
+      "networkmanager"
+      "wheel"
+      "libvirtd"
+      "video"
+      "audio"
+      "disk"
+      "vboxusers"
+    ];
+    group = "users";
+    home = "/home/asulk";
+    uid = 1000;
     packages = with pkgs; [];
   };
 
@@ -116,26 +117,32 @@
     openvpn3
     protonvpn-cli
     wireguard-tools
-	sof-firmware
-	alsa-utils
-	clipse
-	zathura
-	fzf
-	udiskie
-	dbus
-# for libreoffice
-	libreoffice-qt
-	hunspell
-	hunspellDicts.en_US
-	hunspellDicts.ru_RU
+    sof-firmware
+    alsa-utils
+    clipse
+    zathura
+    fzf
+    udiskie
+    dbus
+  # for libreoffice
+    libreoffice-qt
+    hunspell
+    hunspellDicts.en_US
+    hunspellDicts.ru_RU
     
-	os-prober
-	file
-	sioyek
-	zip
-	unzip
-	ghidra
-	spotify
+    os-prober
+    file
+    sioyek
+    zip
+    unzip
+    ghidra
+    spotify
+    nmap
+    inetutils
+    qemu
+    virt-manager
+    alacritty
+    foot
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -156,15 +163,6 @@
 	portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
   };
   
-  # Hyprland flake
-#  wayland.windowManager.hyprland = {
-#    enable = true;
-#    xwayland.enable = true;
-#    plugins = [
-#      inputs.hyprland-plugins.packages.${pkgs.system}.hyprbars
-#    ];
-#  };
-
   xdg.portal = {
     enable = true;
     config.common.default = "*";
@@ -191,7 +189,26 @@
   };
 
   virtualisation.libvirtd.enable = true;
-  boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+  #boot.kernelModules = [ "kvm-amd" "kvm-intel" ];
+	programs.virt-manager.enable = true;
+  virtualisation.virtualbox.host.enable = true;
+	users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
+
+#  virtualisation.libvirtd = {
+#		enable = true;
+#		qemu = {
+#			package = pkgs.qemu_kvm;
+#			runAsRoot = true;
+#			swtpm.enable = true;
+#			ovmf = {
+#				enable = true;
+#				packages = [(pkgs.OVMF.override {
+#					secureBoot = true;
+#					tmpSupport = true;
+#				}).fd];
+#			};
+#		};
+#	};
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [];
