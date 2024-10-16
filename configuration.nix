@@ -1,7 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
 { config, pkgs, inputs, ... }:
 
 {
@@ -21,7 +17,6 @@
 #  };
 
   networking.hostName = "eva"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   
   nix.settings.experimental-features =[ "nix-command" "flakes" ];
 
@@ -143,6 +138,21 @@
     virt-manager
     alacritty
     foot
+		xournalpp
+		brightnessctl
+		osu-lazer-bin
+		anki
+		meson
+		ninja
+		appimage-run
+		#webcord
+		#webcord-vencord
+		vesktop
+		wireshark
+		kanshi
+		cmake
+		gnumake
+		(pkgs.callPackage ./sliver.nix {})
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -185,7 +195,7 @@
 
   services.upower = {
     enable = true;
-	criticalPowerAction = "Hibernate";
+    criticalPowerAction = "Hibernate";
   };
 
   virtualisation.libvirtd.enable = true;
@@ -212,6 +222,15 @@
 
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [];
+
+  programs.appimage.binfmt = true;
+
+	programs.steam.enable = true;
+
+	#(pkgs.callPackage ./sliver.nix {})
+
+  # enables screen brightness keys
+	#programs.light.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

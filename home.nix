@@ -50,8 +50,13 @@
     ".config/waybar/style.css" = {
       source = config.lib.file.mkOutOfStoreSymlink ./configs/waybar/style.css;
     };
+    # Kitty
     ".config/kitty/kitty.conf" = {
       source = config.lib.file.mkOutOfStoreSymlink ./configs/kitty/kitty.conf;
+    };
+		# Foot
+    ".config/foot/foot.ini" = {
+      source = config.lib.file.mkOutOfStoreSymlink ./configs/foot/foot.ini;
     };
 
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
@@ -93,17 +98,17 @@
   };
   
   # adds the home manager module for ags
-#  imports = [ inputs.ags.homeManagerModules.default ];
-#  programs.ags = {
-#    enable = true;
-#    configDir = ./configs/ags;
-#    # additional packages to add to gjs's runtime
-#	extraPackages = with pkgs; [
-#	  gtksourceview
-#	  webkitgtk
-#	  accountsservice
-#	];
-#  };
+  imports = [ inputs.ags.homeManagerModules.default ];
+  programs.ags = {
+    enable = true;
+    configDir = ./configs/ags;
+    # additional packages to add to gjs's runtime
+    extraPackages = with pkgs; [
+      gtksourceview
+      webkitgtk
+      accountsservice
+    ];
+  };
 
   # adds the phinger cursor theme
   home.pointerCursor = {
