@@ -5,7 +5,7 @@
   fonts.fontconfig.enable = true;
   home.packages = with pkgs; [
     noto-fonts
-    noto-fonts-cjk
+    noto-fonts-cjk-sans
     noto-fonts-emoji
     liberation_ttf
     font-awesome
@@ -30,18 +30,18 @@
 	".config/fcitx5/config" = {
 	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/config;
 	};
-	".config/fcitx5/profile" = {
-	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/profile;
-	};
-	".config/fcitx5/conf/chttrans.conf" = {
-	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/chttrans.conf;
-	};
-	".config/fcitx5/conf/pinyin.conf" = {
-	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/pinyin.conf;
-	};
-	".config/fcitx5/conf/punctuation.conf" = {
-	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/punctuation.conf;
-	};
+#	".config/fcitx5/profile" = {
+#	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/profile;
+#	};
+#	".config/fcitx5/conf/chttrans.conf" = {
+#	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/chttrans.conf;
+#	};
+#	".config/fcitx5/conf/pinyin.conf" = {
+#	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/pinyin.conf;
+#	};
+#	".config/fcitx5/conf/punctuation.conf" = {
+#	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/punctuation.conf;
+#	};
 #    ".config/environment.d/envvars.conf" = {
 #      source = config.lib.file.mkOutOfStoreSymlink ./configs/environment.d/envvars.conf;
 #    };

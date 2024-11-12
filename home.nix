@@ -39,10 +39,15 @@
     ".config/hypr/hyprland.conf" = {
       source = config.lib.file.mkOutOfStoreSymlink ./configs/hypr/hyprland.conf;
     };
-    # Neovim
-    ".config/nvim/init.lua" = {
-      source = config.lib.file.mkOutOfStoreSymlink ./configs/nvim/init.lua;
+    #".config/hypr/hyprland.conf".source = ./configs/hypr/hyprland.conf;
+		# Hyprpaper
+    ".config/hypr/hyprpaper.conf" = {
+      source = config.lib.file.mkOutOfStoreSymlink ./configs/hypr/hyprpaper.conf;
     };
+    # Neovim
+#    ".config/nvim/init.lua" = {
+#      source = config.lib.file.mkOutOfStoreSymlink ./configs/nvim/init.lua;
+#    };
     # Waybar
     ".config/waybar/config" = {
       source = config.lib.file.mkOutOfStoreSymlink ./configs/waybar/config;
@@ -98,17 +103,17 @@
   };
   
   # adds the home manager module for ags
-  imports = [ inputs.ags.homeManagerModules.default ];
-  programs.ags = {
-    enable = true;
-    configDir = ./configs/ags;
-    # additional packages to add to gjs's runtime
-    extraPackages = with pkgs; [
-      gtksourceview
-      webkitgtk
-      accountsservice
-    ];
-  };
+  #imports = [ inputs.ags.homeManagerModules.default ];
+  #programs.ags = {
+  #  enable = true;
+  #  configDir = ./configs/ags;
+  #  # additional packages to add to gjs's runtime
+  #  extraPackages = with pkgs; [
+  #    gtksourceview
+  #    webkitgtk
+  #    accountsservice
+  #  ];
+  #};
 
   # adds the phinger cursor theme
   home.pointerCursor = {

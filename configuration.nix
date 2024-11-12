@@ -16,16 +16,35 @@
 #	useOSProber = true;
 #  };
 
-  networking.hostName = "eva"; # Define your hostname.
   
   nix.settings.experimental-features =[ "nix-command" "flakes" ];
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  # networking stuff
+  # defines the hostname
+  networking.hostName = "eva";
+	networking.networkmanager = {
+    # enables networking
+		enable = true;
+		#packages = [ pkgs.networkmanager-openvpn ];
+		#dns = "none";
+	};
+	networking.firewall.enable = false;
+	#networking.nameservers = [ "1.1.1.1" "8.8.8.8" ];
+	#programs.openvpn3.enable = true;
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+
+  systemd.network.enable = true;
+  systemd.network.wait-online.enable = false;
+  services.resolved = {
+    enable = true;
+    dnsovertls = "opportunistic";
+    dnssec = "false";
+    fallbackDns = [
+      "9.9.9.9"
+      "127.0.0.1"
+    ];
+    extraConfig = "Domains=~.";
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -63,6 +82,9 @@
       "audio"
       "disk"
       "vboxusers"
+      # to install grapheneos on pixel
+			"adbusers"
+			"kvm"
     ];
     group = "users";
     home = "/home/asulk";
@@ -78,13 +100,14 @@
   environment.systemPackages = with pkgs; [
     vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     wget
-    neovim
+    #neovim
     lf
     git
+		aquamarine
     hyprland
     kitty
     waybar
-    #hyprpaper
+    hyprpaper
     wofi
     mako
     libnotify
@@ -109,10 +132,9 @@
     google-chrome
     neofetch
     zoom-us
-    openvpn3
     protonvpn-cli
-    wireguard-tools
-    sof-firmware
+		protonvpn-gui
+    wireguard-tools sof-firmware
     alsa-utils
     clipse
     zathura
@@ -153,6 +175,17 @@
 		cmake
 		gnumake
 		(pkgs.callPackage ./sliver.nix {})
+		#openvpn
+		android-tools
+		android-udev-rules
+		usbutils
+		tmux
+		remmina
+		hyprutils
+		niv
+		hyprsunset
+		hyprlock
+    vscode
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -189,8 +222,6 @@
     #jack.enable = true;
   };
 
-  programs.openvpn3.enable = true;
-
 #  xdg.configFile."/home/asulk/.config/fcitx5/profile".force = true;
 
   services.upower = {
@@ -226,6 +257,64 @@
   programs.appimage.binfmt = true;
 
 	programs.steam.enable = true;
+
+	programs.adb.enable = true;
+
+	hardware.bluetooth.enable = true;
+	services.blueman.enable = true;
+
+	programs.nvf = {
+		enable = true;
+		enableManpages = true;
+		settings.vim = {
+		  languages = {
+#				enableDAP = true;
+#				enableLSP = true;
+#				enableTreesitter = true;
+#				bash = {
+#					enable = true;
+#					format.enable = true;
+#				};
+		    clang = {
+          enable = true;
+          cHeader = true;
+	  	  	dap.enable = true;
+	  	  };
+#				nix = {
+#					enable = true;
+#					format.enable = true;
+#					extraDiagnostics.enable = true;
+#				};
+#				python = {
+#					enable = true;
+#					format.enable = true;
+#				};
+			};
+#		  autopairs.enable = true;
+#		  debugMode.enable = true;
+#		  debugger.nvim-dap.enable = true;
+#		  debugger.nvim-dap.ui.enable = true;
+#		  filetree.neo-tree.enable = true;
+#			treesitter.enable = true;
+#			treesitter.highlight.enable = true;
+      # basic configs
+		  colourTerm = true;
+			syntaxHighlighting = true;
+			useSystemClipboard = true;
+#			lineNumberMode = "relNumber";
+			tabWidth = 2;
+
+#			minimap.codewindow.enable = true;
+#			projects.project-nvim.enable = true;
+#			telescope.enable = true;
+#			terminal.toggleterm.enable = true;
+#			ui.colorizer.enable = true;
+#			utility.images.image-nvim.enable = true;
+#			visuals.scrollBar.enable = true;
+		};
+
+	};
+				
 
 	#(pkgs.callPackage ./sliver.nix {})
 
