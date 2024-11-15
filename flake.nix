@@ -93,6 +93,7 @@
           modules = [
 						./home.nix
 						./text.nix
+            #./kanshi.nix
 					];
         };
       };
