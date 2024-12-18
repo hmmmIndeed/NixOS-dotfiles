@@ -167,8 +167,6 @@
 		meson
 		ninja
 		appimage-run
-		#webcord
-		#webcord-vencord
 		vesktop
 		wireshark
 		kanshi
@@ -186,6 +184,7 @@
 		hyprsunset
 		hyprlock
     vscode
+    joplin-desktop
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -314,7 +313,12 @@
 		};
 
 	};
-				
+
+#  systemd.user.services.kanshi = {
+#    enable = true;
+#    description = "kanshi daemon";
+#		systemdTarget = "";
+#  };
 
 	#(pkgs.callPackage ./sliver.nix {})
 
