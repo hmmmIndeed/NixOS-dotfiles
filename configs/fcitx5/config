@@ -1,20 +1,18 @@
 [Hotkey]
+# Trigger Input Method
+TriggerKeys=
 # Enumerate when press trigger key repeatedly
 EnumerateWithTriggerKeys=True
-# Enumerate Input Method Forward
-EnumerateForwardKeys=
 # Enumerate Input Method Backward
 EnumerateBackwardKeys=
 # Skip first input method while enumerating
 EnumerateSkipFirst=False
 
-[Hotkey/TriggerKeys]
-0=Control+space
-1=Zenkaku_Hankaku
-2=Hangul
-
 [Hotkey/AltTriggerKeys]
 0=Shift_L
+
+[Hotkey/EnumerateForwardKeys]
+0=Shift+space
 
 [Hotkey/EnumerateGroupForwardKeys]
 0=Super+space
@@ -46,6 +44,8 @@ EnumerateSkipFirst=False
 [Behavior]
 # Active By Default
 ActiveByDefault=False
+# Reset state on Focus In
+resetStateWhenFocusIn=No
 # Share Input State
 ShareInputState=No
 # Show preedit in application

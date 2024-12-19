@@ -1,10 +1,10 @@
 [Groups/0]
 # Group Name
-Name=Default
+Name=eng+cangjie+rus
 # Layout
 Default Layout=us
 # Default Input Method
-DefaultIM=pinyin
+DefaultIM=cangjie5
 
 [Groups/0/Items/0]
 # Name
@@ -14,10 +14,70 @@ Layout=
 
 [Groups/0/Items/1]
 # Name
+Name=cangjie5
+# Layout
+Layout=
+
+[Groups/0/Items/2]
+# Name
+Name=keyboard-ru
+# Layout
+Layout=
+
+[Groups/1]
+# Group Name
+Name=Default
+# Layout
+Default Layout=us
+# Default Input Method
+DefaultIM=keyboard-ru
+
+[Groups/1/Items/0]
+# Name
+Name=keyboard-us
+# Layout
+Layout=
+
+[Groups/1/Items/1]
+# Name
 Name=pinyin
+# Layout
+Layout=
+
+[Groups/1/Items/2]
+# Name
+Name=keyboard-ru
+# Layout
+Layout=
+
+[Groups/2]
+# Group Name
+Name=eng+pinyin+rus
+# Layout
+Default Layout=us
+# Default Input Method
+DefaultIM=pinyin
+
+[Groups/2/Items/0]
+# Name
+Name=keyboard-us
+# Layout
+Layout=
+
+[Groups/2/Items/1]
+# Name
+Name=pinyin
+# Layout
+Layout=
+
+[Groups/2/Items/2]
+# Name
+Name=keyboard-ru
 # Layout
 Layout=
 
 [GroupOrder]
 0=Default
+1=eng+pinyin+rus
+2=eng+cangjie+rus
 
