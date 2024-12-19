@@ -41,7 +41,7 @@ Whenever you configure anything via the GUI, it'll change the files in `~/.confi
 
 ##### `~/.config/fcitx5/profile` and my Nix config `./configs/fcitx5/profile`
 
-This contains anything configured in the "Input Method" tab. You can create a group for each set of language rotations and I have this one named "eng+pinyin+rus". The default group is named "Default", which I have removed. If you will use multiple groups, choose one to add input methods to.
+This contains anything configured in the "Input Method" tab. You can create a group for each set of language rotations and I have this one named "eng+pinyin+rus". The default group is named "Default", which I have removed. If you will use multiple groups, choose one to add input methods to. Also, more input methods can be added from NixOS packages, such as `fcitx5-table-extra` for Cangjie, Boshiamy, etc. Those NixOS packages are added in my `home.nix`.
 
 To add an input method, select an option from the right side of the configuration window, using the search feature and unchecking the "Only Show Current Language" option (near the bottom right of the configuration window) if necessary. When an input method is selected, the first arrow (pointing to the left) in the middle of the configuration window should turn green, allowing you to add that input method to the group.
 
@@ -57,5 +57,5 @@ This contains anything configured in the "Global Options" tab. The "Global Optio
 
 ##### `~/.config/fcitx5/conf` folder and my Nix config `./configs/fcitx5/conf`
 
-This contains anything configured in the "Addons" tab. A file will be made once an option in any of the settings is changed from the default. The "Addons" tab:
+This contains anything configured in the "Addons" tab. A file will be made once an option in any of the settings is changed from the default. Make sure to save those files to your Nix config like mine in `home.nix`. The "Addons" tab:
 ![image](https://github.com/user-attachments/assets/2c6511a0-dbf3-43b2-9273-67300681cfaa)
