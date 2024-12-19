@@ -1,0 +1,8 @@
+updates flakes:
+nix flake update
+
+updates anything configured via home manager (with flakes)
+home-manager switch --flake .
+
+updates system to new config (with flakes)
+sudo nixos-rebuild switch --flake .
