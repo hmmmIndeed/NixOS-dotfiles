@@ -1,0 +1,42 @@
+
+@import url("topbar.css");
+@import url("sidebar.css");
+@import url("extensionsMenu.css");
+
+ * {
+  font-family: "Lexend" !important;
+}
+
+/* var names are based on those in the "Firefox Color"
+ * extension by Mozilla Firefox */
+
+/* in the Custom colors tab
+--toolbar-bg: #452d2d !important;
+--toolbar-button-icon-and-text: #f4cdcd !important;
+--bg: #251818 !important;
+--bg-tab-text: #ffffff !important;
+--search-bar-bg: #251818 !important;
+--search-text: #f4cdcd !important;
+--tab-highlight: #f8708c !important;
+--popup-bg: #251818 !important;
+--popup-text: #f4cdcd !important;
+*/
+
+/* any variable not here is using Firefox's default style */
+
+/*  in the Advanced colors tab
+--new-tab-bg: #251818 !important;
+--new-tab-text: #f4cdcd !important;
+--popup-border: #f4cdcd !important;
+--popup-highlight-text: #ffffff !important;
+--popup-highlight: #452d2d !important;
+--sidebar-border: #f4cdcd !important;
+--sidebar-highlight-text: #ffffff !important;
+--sidebar-highlight: #452d2d !important;
+--sidebar-text: #f4cdcd !important;
+*/
+
+/* link to theme:
+ * https://addons.mozilla.org/en-US/developers/addon/dark-red-vibes
+ * (I tried making the colrs as accurate to that theme as
+ * possible) */

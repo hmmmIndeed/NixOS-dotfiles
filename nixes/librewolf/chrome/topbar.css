@@ -1,0 +1,40 @@
+/* css for the top bar: nav bar and urlbar */
+
+/* import theme colors */
+@import url(themeColorVars.css);
+
+/* --------------------------- */
+/* nav-bar (bar with the tabs) */
+/* --------------------------- */
+
+/* removes the bookmark star on the url bar */
+#star-button-box {
+  display: none;
+}
+
+/* sets the bg of the nav-bar and removes line under */
+#navigator-toolbox {
+  background: var(--toolbar-bg) !important;
+  border-bottom: 0px solid #00000000 !important;
+}
+
+/* removes all tabs button and new tab button */
+#alltabs-button,
+#tabs-newtab-button {
+  display: none !important;
+}
+
+
+/* ------ */
+/* urlbar */
+/* ------ */
+
+/* urlbar bg */
+#urlbar-background {
+  background-color: var(--search-bar-bg) !important;
+}
+
+/* urlbar text color */
+#urlbar {
+  color: var(--search-text) !important;
+}

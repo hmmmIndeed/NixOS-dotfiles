@@ -1,0 +1,39 @@
+/* css for the minimal extensions menu (accessed in nav-bar) */
+
+/* import theme colors */
+@import url(themeColorVars.css);
+
+/* source:
+ * https://github.com/Shina-SG/Shina-Fox/blob/main/userChrome.css
+ */
+
+/* ---------------------- */
+/* minimal extension menu */
+/* ---------------------- */
+
+#unified-extensions-panel #unified-extensions-view {
+  width: 100% !important;
+}
+
+#unified-extensions-view .unified-extensions-item-menu-button.subviewbutton,
+#unified-extensions-view .unified-extensions-item-action-button .unified-extensions-item-contents {
+  display:none !important;
+}
+
+#unified-extensions-view .panel-subview-body {
+  padding: 5px !important;
+}
+
+#unified-extensions-view .unified-extensions-item .unified-extensions-item-icon, 
+#unified-extensions-view .unified-extensions-item .toolbarbutton-badge-stack {
+  margin-inline-end: 0px !important;
+}
+
+#unified-extensions-view #overflowed-extensions-list,
+#unified-extensions-view #unified-extensions-area,
+#unified-extensions-view .unified-extensions-list {
+  display: grid !important;
+  grid-template-columns: 4, auto);
+  justify-items: left !important;
+  aligh-items: left !important;
+}

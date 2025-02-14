@@ -7,14 +7,18 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+#  boot.loader.systemd-boot.enable = true;
+#  boot.loader.efi.canTouchEfiVariables = true;
   # OS-Prober
-#  boot.loader.grub = {
-#    enable = true;
-#	device = "/dev/nvme0n1";
-#	useOSProber = true;
-#  };
+  boot.loader = {
+    grub = {
+      enable = true;
+      device = "nodev";
+      useOSProber = true;
+      efiSupport = true;
+    };
+    efi.canTouchEfiVariables = true;
+  };
 
   
   nix.settings.experimental-features =[ "nix-command" "flakes" ];
@@ -25,7 +29,7 @@
 	networking.networkmanager = {
     # enables networking
 		enable = true;
-		#packages = [ pkgs.networkmanager-openvpn ];
+		plugins = [ pkgs.networkmanager-openvpn ];
 		#dns = "none";
 	};
 	networking.firewall.enable = false;
@@ -127,12 +131,12 @@
 
     vscode
     python3
-    #librewolf
+    librewolf
     ungoogled-chromium
     google-chrome
     neofetch
     zoom-us
-    protonvpn-cli
+    protonvpn-cli_2
 		protonvpn-gui
     wireguard-tools sof-firmware
     alsa-utils
@@ -172,7 +176,7 @@
 		kanshi
 		cmake
 		gnumake
-		(pkgs.callPackage ./sliver.nix {})
+		#(pkgs.callPackage ./nixes/sliver.nix {})
 		#openvpn
 		android-tools
 		android-udev-rules
@@ -185,6 +189,19 @@
 		hyprlock
     vscode
     joplin-desktop
+    onlyoffice-desktopeditors
+    pwndbg
+    hyprpolkitagent
+    signal-desktop
+    inkscape
+    gnome-keyring
+    libsecret
+    seahorse
+    python313Packages.proton-keyring-linux
+    trashy
+    vlc
+    p7zip
+    emacs
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -262,68 +279,110 @@
 	hardware.bluetooth.enable = true;
 	services.blueman.enable = true;
 
-	programs.nvf = {
-		enable = true;
-		enableManpages = true;
-		settings.vim = {
-		  languages = {
-#				enableDAP = true;
-#				enableLSP = true;
-#				enableTreesitter = true;
-#				bash = {
-#					enable = true;
-#					format.enable = true;
-#				};
-		    clang = {
-          enable = true;
-          cHeader = true;
-	  	  	dap.enable = true;
-	  	  };
-#				nix = {
-#					enable = true;
-#					format.enable = true;
-#					extraDiagnostics.enable = true;
-#				};
-#				python = {
-#					enable = true;
-#					format.enable = true;
-#				};
-			};
-#		  autopairs.enable = true;
-#		  debugMode.enable = true;
-#		  debugger.nvim-dap.enable = true;
-#		  debugger.nvim-dap.ui.enable = true;
-#		  filetree.neo-tree.enable = true;
-#			treesitter.enable = true;
-#			treesitter.highlight.enable = true;
-      # basic configs
-		  colourTerm = true;
-			syntaxHighlighting = true;
-			useSystemClipboard = true;
-#			lineNumberMode = "relNumber";
-			tabWidth = 2;
+#	programs.nvf = {
+#		enable = true;
+#		enableManpages = true;
+#		settings.vim = {
+#		  languages = {
+##				enableDAP = true;
+##				enableLSP = true;
+##				enableTreesitter = true;
+##				bash = {
+##					enable = true;
+##					format.enable = true;
+##				};
+#		    clang = {
+#          enable = true;
+#          cHeader = true;
+#	  	  	dap.enable = true;
+#	  	  };
+##				nix = {
+##					enable = true;
+##					format.enable = true;
+##					extraDiagnostics.enable = true;
+##				};
+##				python = {
+##					enable = true;
+##					format.enable = true;
+##				};
+#			};
+##		  autopairs.enable = true;
+##		  debugMode.enable = true;
+##		  debugger.nvim-dap.enable = true;
+##		  debugger.nvim-dap.ui.enable = true;
+##		  filetree.neo-tree.enable = true;
+##			treesitter.enable = true;
+##			treesitter.highlight.enable = true;
+#      # basic configs
+#			syntaxHighlighting = true;
+#			useSystemClipboard = true;
+##			lineNumberMode = "relNumber";
+#      options = {
+#        shiftwidth = 2;
+#        tabstop = 2;
+#        termguicolors = true;
+#      };
+#
+##			minimap.codewindow.enable = true;
+##			projects.project-nvim.enable = true;
+##			telescope.enable = true;
+##			terminal.toggleterm.enable = true;
+##			ui.colorizer.enable = true;
+##			utility.images.image-nvim.enable = true;
+##			visuals.scrollBar.enable = true;
+#		};
+#
+#	};
+  
+  services.udisks2.enable = true;
+  security.polkit = {
+    enable = true;
+#    extraConfig = "
+#      polkit.addRule(function(action, subject) {
+#        var YES = polkit.Result.YES;
+#        var permission = {
+#          // required for udisks1:
+#          "org.freedesktop.udisks.filesystem-mount": YES,
+#          "org.freedesktop.udisks.luks-unlock": YES,
+#          "org.freedesktop.udisks.drive-eject": YES,
+#          "org.freedesktop.udisks.drive-detach": YES,
+#          // required for udisks2:
+#          "org.freedesktop.udisks2.filesystem-mount": YES,
+#          "org.freedesktop.udisks2.encrypted-unlock": YES,
+#          "org.freedesktop.udisks2.eject-media": YES,
+#          "org.freedesktop.udisks2.power-off-drive": YES,
+#          // required for udisks2 if using udiskie from another seat (e.g. systemd):
+#          "org.freedesktop.udisks2.filesystem-mount-other-seat": YES,
+#          "org.freedesktop.udisks2.filesystem-unmount-others": YES,
+#          "org.freedesktop.udisks2.encrypted-unlock-other-seat": YES,
+#          "org.freedesktop.udisks2.encrypted-unlock-system": YES,
+#          "org.freedesktop.udisks2.eject-media-other-seat": YES,
+#          "org.freedesktop.udisks2.power-off-drive-other-seat": YES
+#        };
+#        if (subject.isInGroup("dev")) {
+#          return permission[action.id];
+#        }
+#      });     
+#    ";
+  };
 
-#			minimap.codewindow.enable = true;
-#			projects.project-nvim.enable = true;
-#			telescope.enable = true;
-#			terminal.toggleterm.enable = true;
-#			ui.colorizer.enable = true;
-#			utility.images.image-nvim.enable = true;
-#			visuals.scrollBar.enable = true;
-		};
+#  nix.gc = {
+#    automatic = true;
+#    dates = "monthly";
+#    options = "--delete-older-than 31d";
+#  };
+#
+#  hardware.opentabletdriver = {
+#    enable = true;
+#    daemon.enable = true;
+#  };
 
-	};
 
 #  systemd.user.services.kanshi = {
 #    enable = true;
 #    description = "kanshi daemon";
 #		systemdTarget = "";
 #  };
-
-	#(pkgs.callPackage ./sliver.nix {})
-
-  # enables screen brightness keys
-	#programs.light.enable = true;
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

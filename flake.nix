@@ -45,11 +45,12 @@
 	  ags.url = "github:Aylur/ags";
     # for schizofox
 		schizofox.url = "github:schizofox/schizofox";
-
     # for nvf
-		nvf = {
-			url = "github:notashelf/nvf";
-		};
+		nvf.url = "github:notashelf/nvf";
+
+    # for the other .nix files
+    #imports = [ ./nixes ];
+    #nixFiles = import ./nixes/default.nix;
   };
 
 
@@ -62,13 +63,14 @@
     in {
       nixosConfigurations = {
         eva = lib.nixosSystem {
-          inherit system;
+          #inherit system;
           # for Hyprland plugins
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs system; };
           modules = [ 
             ./configuration.nix
-            ./suspend-and-hibernate.nix
-            nvf.nixosModules.default
+            ./nixes/suspend-and-hibernate.nix
+            ./nixes/greetd.nix
+            inputs.nvf.nixosModules.default
 
 #    		home-manager.nixosModules.home-manager
 #			{
@@ -88,11 +90,11 @@
       homeConfigurations = {
         asulk = home-manager.lib.homeManagerConfiguration {
           inherit pkgs;
-          # for ags
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs system; };
           modules = [
 						./home.nix
-						./text.nix
+						./nixes/text.nix
+            #./nixes/schizofox.nix
             #./kanshi.nix
 					];
         };

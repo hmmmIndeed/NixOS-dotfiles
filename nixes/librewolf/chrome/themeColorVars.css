@@ -1,0 +1,22 @@
+/* variables */
+:root {
+  --toolbar-bg: #452d2d !important;
+  --toolbar-button-icon-and-text: #f4cdcd !important;
+  --bg: #251818 !important;
+  --bg-tab-text: #ffffff !important;
+  --search-bar-bg: #251818 !important;
+  --search-text: #f4cdcd !important;
+  --tab-highlight: #f8708c !important;
+  --popup-bg: #251818 !important;
+  --popup-text: #f4cdcd !important;
+
+  --new-tab-bg: #251818 !important;
+  --new-tab-text: #f4cdcd !important;
+  --popup-border: #f4cdcd !important;
+  --popup-highlight-text: #ffffff !important;
+  --popup-highlight: #452d2d !important;
+  --sidebar-border: #f4cdcd !important;
+  --sidebar-highlight-text: #ffffff !important;
+  --sidebar-highlight: #452d2d !important;
+  --sidebar-text: #f4cdcd !important;
+}

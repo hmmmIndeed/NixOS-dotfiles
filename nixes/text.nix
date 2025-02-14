@@ -22,20 +22,20 @@
   	  fcitx5-mozc
       libime
       fcitx5-table-extra
-      fcitx5-mcbopomofo
+      #fcitx5-mcbopomofo
     ];
   };
 
   home.file = {
     # Fcitx
-	".config/fcitx5/config" = {
-	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/config;
-    force = true;
-	};
-	".config/fcitx5/profile" = {
-	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/profile;
-    force = true;
-	};
+    ".config/fcitx5/config" = {
+      source = config.lib.file.mkOutOfStoreSymlink ../configs/fcitx5/config;
+      force = true;
+    };
+    ".config/fcitx5/profile" = {
+      source = config.lib.file.mkOutOfStoreSymlink ../configs/fcitx5/profile;
+      force = true;
+    };
 #	".config/fcitx5/conf/chttrans.conf" = {
 #	  source = config.lib.file.mkOutOfStoreSymlink ./configs/fcitx5/conf/chttrans.conf;
 #	};

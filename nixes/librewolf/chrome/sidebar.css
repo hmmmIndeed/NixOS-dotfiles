@@ -1,0 +1,99 @@
+/* css for the side bar */
+
+/* import theme colors */
+@import url(themeColorVars.css);
+
+/* source:
+ * https://github.com/Shina-SG/Shina-Fox/blob/main/userChrome.css
+ */
+
+/* ------------------- */
+/* behind sidebar area */
+/* ------------------- */
+
+:root {
+  --tab-border-radius: 3px !important;
+  --nav-bar-width: 2;
+  --tab-height: 36;
+  --tab-border: 8;
+}
+
+#nav-bar {
+  margin-top:calc(var(--tab-height) * -1px - var(--tab-border) * 1px) !important;
+  height: calc((var(--tab-height) * 1px + var(--tab-border) * 1px) + 0px);
+}
+
+#nav-bar {
+  margin-left: 35px !important;
+}
+
+#urlbar-container {
+  min-width: 0px !important;
+  flex: auto !important;
+}
+
+@media screen and (max-width: 100px) {
+  #TabsToolbar {
+    margin-right: 0 !important;
+  }
+  #nav-bar {
+    margin-left: 0 !important;
+  }
+}
+
+/* ----------------------- */
+/* sidebar expand on hover */
+/* ----------------------- */
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] {
+  --sidebar-width: 40px;
+  --sidebar-hover-width: 512px;
+  position: relative;
+  min-width: var(--sidebar-width) !important;
+  width: var(--sidebar-width) !important;
+  max-width: var(--sidebar-width) !important;
+  z-index: 1;
+}
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]>#sidebar {
+  transition: min-width 200ms ease-in-out !important;
+  min-width: var(--sidebar-width) !important;
+  will-change: min-width;
+  transition-delay: 0.3s !important;
+}
+
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"]:hover>#sidebar {
+  min-width: var(--sidebar-hover-width) !important;
+  transition-delay: 0.1s !important;
+}
+
+#sidebar-box {
+  opacity: 0.9;
+}
+
+/* ----------------------------- */
+/* hide side bar header and line */
+/* ----------------------------- */
+
+#sidebar-header,
+#sidebar-splitter {
+  display: none !important;
+}
+
+/* -------------- */
+/* sidebar border */
+/* -------------- */
+
+#sidebar-box #sidebar,
+#sidebar-box #webextpanels-window {
+  border-radius: 5px !important;
+  /* margin: top right bottom left */
+  margin: 5px 5px 5px 5px !important;
+  border: 2px solid rgba(51, 51, 51, 0.1);
+  transition: border 0.3s ease;
+}
+
+#sidebar-box #sidebar:hover,
+#sidebar-box #webextpanels-:hover {
+  border: 2px solid var(--sidebar-border);
+}
