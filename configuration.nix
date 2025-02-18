@@ -107,7 +107,7 @@
     #neovim
     lf
     git
-		aquamarine
+    aquamarine
     hyprland
     kitty
     waybar
@@ -125,10 +125,10 @@
     slurp
     grim
     firefox
-
+    
     fuse
     ntfs3g
-
+    
     vscode
     python3
     librewolf
@@ -137,7 +137,7 @@
     neofetch
     zoom-us
     protonvpn-cli_2
-		protonvpn-gui
+    protonvpn-gui
     wireguard-tools sof-firmware
     alsa-utils
     clipse
@@ -145,7 +145,7 @@
     fzf
     udiskie
     dbus
-  # for libreoffice
+    # for libreoffice
     libreoffice-qt
     hunspell
     hunspellDicts.en_US
@@ -164,29 +164,29 @@
     virt-manager
     alacritty
     foot
-		xournalpp
-		brightnessctl
-		osu-lazer-bin
-		anki
-		meson
-		ninja
-		appimage-run
-		vesktop
-		wireshark
-		kanshi
-		cmake
-		gnumake
-		#(pkgs.callPackage ./nixes/sliver.nix {})
-		#openvpn
-		android-tools
-		android-udev-rules
-		usbutils
-		tmux
-		remmina
-		hyprutils
-		niv
-		hyprsunset
-		hyprlock
+    xournalpp
+    brightnessctl
+    osu-lazer-bin
+    anki
+    meson
+    ninja
+    appimage-run
+    vesktop
+    wireshark
+    kanshi
+    cmake
+    gnumake
+    #(pkgs.callPackage ./nixes/sliver.nix {})
+    #openvpn
+    android-tools
+    android-udev-rules
+    usbutils
+    tmux
+    remmina
+    hyprutils
+    niv
+    hyprsunset
+    hyprlock
     vscode
     joplin-desktop
     onlyoffice-desktopeditors
@@ -202,6 +202,7 @@
     vlc
     p7zip
     emacs
+    mlocate
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
@@ -210,17 +211,50 @@
     trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
   };
   
-  # Hyprland nixpkg
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
+	programs = {
+		# Hyprland nixpkg
+		hyprland = {
+			enable = true;
+			xwayland.enable = true;
 # this line bugs
 #    package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
 # sets hyprland to the stable package
-	#package = inputs.hyprland.${pkgs.system}.packages.hyprland;
-	package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
-	portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
-  };
+		#package = inputs.hyprland.${pkgs.system}.packages.hyprland;
+		package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
+		portalPackage = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.xdg-desktop-portal-hyprland;
+		};
+
+		nix-ld.enable = true;
+		nix-ld.libraries = with pkgs; [];
+
+		appimage.binfmt = true;
+		
+		# Steam
+		steam.enable = true;
+
+		# Android Debug Bridge (needed to install GrapheneOS)
+		adb.enable = true;
+
+		# Neovim
+		neovim = {
+			enable = true;
+			defaultEditor = true;
+			configure = {
+				packages.myVimPackage = with pkgs.vimPlugins; {
+					start = [
+						nvim-treesitter.withAllGrammars # text highlighting
+						kanagawa-nvim # kanagawa theme
+						vim-nix # nix highlighting
+            nerdtree # file structure inside nvim
+            which-key-nvim # shows keybindings
+            nvim-surround # shortcuts for setting (), {}, etc.
+            rainbow-delimiters-nvim # colored parenthesis
+					];
+				};
+				customRC = builtins.readFile ./configs/nvim/init.vim;
+			};
+		};
+	};
   
   xdg.portal = {
     enable = true;
@@ -267,17 +301,11 @@
 #		};
 #	};
 
-  programs.nix-ld.enable = true;
-  programs.nix-ld.libraries = with pkgs; [];
-
-  programs.appimage.binfmt = true;
-
-	programs.steam.enable = true;
-
-	programs.adb.enable = true;
 
 	hardware.bluetooth.enable = true;
 	services.blueman.enable = true;
+
+
 
 #	programs.nvf = {
 #		enable = true;
@@ -314,23 +342,23 @@
 ##			treesitter.enable = true;
 ##			treesitter.highlight.enable = true;
 #      # basic configs
-#			syntaxHighlighting = true;
-#			useSystemClipboard = true;
-##			lineNumberMode = "relNumber";
+#      syntaxHighlighting = true;
+#      useSystemClipboard = true;
+##      lineNumberMode = "relNumber";
 #      options = {
 #        shiftwidth = 2;
 #        tabstop = 2;
 #        termguicolors = true;
 #      };
 #
-##			minimap.codewindow.enable = true;
-##			projects.project-nvim.enable = true;
-##			telescope.enable = true;
-##			terminal.toggleterm.enable = true;
-##			ui.colorizer.enable = true;
-##			utility.images.image-nvim.enable = true;
-##			visuals.scrollBar.enable = true;
-#		};
+#      minimap.codewindow.enable = true;
+#      projects.project-nvim.enable = true;
+#      telescope.enable = true;
+#      terminal.toggleterm.enable = true;
+#      ui.colorizer.enable = true;
+#      utility.images.image-nvim.enable = true;
+#      visuals.scrollBar.enable = true;
+#    };
 #
 #	};
   
@@ -381,7 +409,7 @@
 #  systemd.user.services.kanshi = {
 #    enable = true;
 #    description = "kanshi daemon";
-#		systemdTarget = "";
+#    systemdTarget = "";
 #  };
 
   # Some programs need SUID wrappers, can be configured further or are

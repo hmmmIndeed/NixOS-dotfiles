@@ -47,8 +47,11 @@
     ".config/foot/foot.ini" = {
       source = config.lib.file.mkOutOfStoreSymlink ./configs/foot/foot.ini;
     };
-		# LibreWolf
-    #".librewolf" = {
+		# Neovim
+    #".config/nvim/init.lua" = {
+    #  source = config.lib.file.mkOutOfStoreSymlink ./configs/nvim/init.lua;
+    #};
+    #".config" = {
     #  source = config.lib.file.mkOutOfStoreSymlink ./configs/foot/foot.ini;
     #};
 
@@ -74,16 +77,18 @@
   };
 
   # Let Home Manager install and manage itself.
-  programs.home-manager.enable = true;
+  programs = {
+		home-manager.enable = true;
 
-  programs.bash = {
-    enable = true;
-    shellAliases = {
-      ".." = "cd ..";
-      "auto" = "sudo mount UUID=2CB9303F31D8F6AD /data";
-      "mntdata" = "udisksctl mount --block-device /dev/disk/by-uuid/2CB9303F31D8F6AD --no-user-interaction";
-    };
-  };
+		bash = {
+			enable = true;
+			shellAliases = {
+				".." = "cd ..";
+				"auto" = "sudo mount UUID=2CB9303F31D8F6AD /data";
+				"mntdata" = "udisksctl mount --block-device /dev/disk/by-uuid/2CB9303F31D8F6AD --no-user-interaction";
+			};
+		};
+	};
   
   # adds the home manager module for ags
   #imports = [ inputs.ags.homeManagerModules.default ];
