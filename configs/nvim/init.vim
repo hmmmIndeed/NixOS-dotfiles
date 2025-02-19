@@ -23,8 +23,13 @@ set foldnestmax=3		" only fold up to 3 nested levels
 colorscheme kanagawa	" sets color scheme to kanagawa
 
 nnoremap t :NERDTree	" runs NERDTree
-nnoremap py :!python %	" runs opened file in python
-nnoremap sh :!bash %	" runs opened file in bash
+
+" commands can't be on same line as command since the tab and " are registered
+" as part of the command for some reason
+" runs opened file in python, ran with ":PY"
+command PY !python %
+" runs opened file in bash, ran with ":SH"
+command SH !bash %
 
 " sources:
 " https://www.meetgor.com/vim-keymaps/

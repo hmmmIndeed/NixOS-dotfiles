@@ -111,6 +111,7 @@
     hyprland
     kitty
     waybar
+    ags
     hyprpaper
     wofi
     mako
@@ -119,7 +120,12 @@
     wl-clipboard
     networkmanagerapplet
     fcitx5
+
+    # everything needed for thunar
     xfce.thunar
+    xfce.tumbler
+    gvfs
+
     dmenu
     cliphist
     slurp

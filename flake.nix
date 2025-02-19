@@ -42,15 +42,11 @@
 
 
     # for ags
-	  ags.url = "github:Aylur/ags";
+    ags.url = "github:Aylur/ags";
     # for schizofox
 		schizofox.url = "github:schizofox/schizofox";
     # for nvf
 		nvf.url = "github:notashelf/nvf";
-
-    # for the other .nix files
-    #imports = [ ./nixes ];
-    #nixFiles = import ./nixes/default.nix;
   };
 
 
