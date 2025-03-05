@@ -209,6 +209,8 @@
     p7zip
     emacs
     mlocate
+    gtk3
+    zellij
   ];
   
   # using Cachix so I don't have to compile Hyprland myself

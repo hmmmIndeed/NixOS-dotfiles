@@ -22,7 +22,14 @@ set foldnestmax=3		" only fold up to 3 nested levels
 
 colorscheme kanagawa	" sets color scheme to kanagawa
 
-nnoremap t :NERDTree	" runs NERDTree
+" runs NERDTree
+nnoremap t :NERDTree
+" "d" wouldn't copy anymore, will just delete
+nnoremap d "_d
+xnoremap d "_d
+" "p" and "P" wouldn't copy anymore, just paste
+xnoremap p "_dp
+xnoremap P "_dP
 
 " commands can't be on same line as command since the tab and " are registered
 " as part of the command for some reason
