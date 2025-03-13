@@ -1,5 +1,5 @@
 updates flakes (updates packages):
-nix flake update
+sudo nix flake update
 
 updates anything configured via home manager (with flakes) (not sure if updates packages):
 home-manager switch --flake .
