@@ -196,7 +196,7 @@
     vscode
     joplin-desktop
     onlyoffice-desktopeditors
-    pwndbg
+    #pwndbg
     hyprpolkitagent
     signal-desktop
     inkscape
@@ -212,6 +212,7 @@
     gtk3
     zellij
     spice
+    obsidian
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
