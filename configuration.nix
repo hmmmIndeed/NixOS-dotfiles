@@ -213,6 +213,7 @@
     zellij
     spice
     obsidian
+    tor-browser
   ];
   
   # using Cachix so I don't have to compile Hyprland myself
