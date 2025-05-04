@@ -197,6 +197,7 @@
     joplin-desktop
     onlyoffice-desktopeditors
     #pwndbg
+    gdb
     hyprpolkitagent
     signal-desktop
     inkscape
